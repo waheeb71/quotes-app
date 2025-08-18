@@ -36,7 +36,7 @@ A professional **React** application for creating, editing, and managing quotes 
 git clone git@github.com:waheeb71/quotes-app.git
 cd quotes-app
 pnpm inst
-
+```
 ---
 
 ##  Contact:
