@@ -140,7 +140,7 @@ const QuoteForm = () => {
       "bg-blue-200": "#bfdbfe",
       "bg-gray-200": "#e5e7eb",
       "bg-gray-100": "#f3f4f6",
-      "bg-white": "#ffffff",
+      "bg-white": "#ffffffff",
       "bg-indigo-500": "#6366f1",
       "bg-indigo-600": "#4f46e5",
       "bg-indigo-700": "#4338ca",

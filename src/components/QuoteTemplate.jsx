@@ -9,6 +9,14 @@ const QuoteTemplate = ({ data, showTax }) => {
       dir="rtl"
       className="font-[Arial] p-6 bg-white text-black text-sm leading-6"
     >
+       {/* العلامة المائية */}
+  <div className="absolute inset-0 flex items-center justify-center pointer-events-none translate-y-17">
+    <img
+      src="/watermark.png"
+      alt="Watermark"
+      className="w-1/3 opacity-20"
+    />
+  </div>
     {/* الترويسة */}
 <div className="border-2 p-2 flex items-center justify-evenly flex-nowrap bg-white">
   
