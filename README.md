@@ -23,9 +23,6 @@ A professional **React** application for creating, editing, and managing quotes 
 ---
 
 ## Screenshots
-
-### Dashboard / Main Page
-
 ![Dashboard](screenshots/dashboard.png)
 
 ### Create Quote
