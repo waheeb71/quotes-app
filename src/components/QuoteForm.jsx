@@ -9,6 +9,8 @@ import html2canvas from "html2canvas";
 import QuoteActions from "./QuoteActions"; 
 
 const QuoteForm = () => {
+  const [showTax, setShowTax] = useState(false);
+
     const { quoteId } = useParams(); // إذا تم تمرير id للعرض
   const [data, setData] = useState({
     company_name: "مؤسسة القوة العاشرة للمقاولات العامة",
@@ -85,10 +87,18 @@ useEffect(() => {
     const newItems = [...data.items];
     newItems[index][field] = value;
     newItems[index].total_price = newItems[index].quantity * newItems[index].unit_price;
-    const subtotal = newItems.reduce((sum, item) => sum + item.total_price, 0);
-    const vat_amount = (subtotal * data.vat_rate) / 100;
-    const total = subtotal + vat_amount;
-    setData((prev) => ({ ...prev, items: newItems, subtotal, vat_amount, total }));
+   const subtotal = newItems.reduce((sum, item) => sum + item.total_price, 0);
+const vat_amount = (subtotal * data.vat_rate) / 100;
+const total = subtotal + vat_amount;
+
+setData(prev => ({
+  ...prev,
+  items: newItems,
+  subtotal,      // إجمالي قبل الضريبة
+  vat_amount,    // الضريبة المضافة
+  total          // الإجمالي بعد الضريبة
+}));
+
   };
 
  
@@ -260,12 +270,16 @@ const downloadPDF = async () => {
 <QuoteActions
   saveToFirebase={saveToFirebase}
   downloadPDF={downloadPDF}
+  showTax={showTax}
+  toggleShowTax={() => setShowTax(prev => !prev)}
 />
+
 
 
       {/* المعاينة */}
       <div className="mt-10">
-        <QuoteTemplate data={data} />
+      <QuoteTemplate data={data} showTax={showTax} />
+
       </div>
     </div>
   );

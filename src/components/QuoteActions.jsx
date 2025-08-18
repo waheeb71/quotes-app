@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-const QuoteActions = ({ saveToFirebase, downloadPDF }) => {
+const QuoteActions = ({ saveToFirebase, downloadPDF, showTax, toggleShowTax }) => {
+
   const [loadingFirebase, setLoadingFirebase] = useState(false);
   const [loadingPDF, setLoadingPDF] = useState(false);
 
@@ -85,6 +86,13 @@ const QuoteActions = ({ saveToFirebase, downloadPDF }) => {
           "📥 تحميل PDF"
         )}
       </button>
+      <button
+  onClick={toggleShowTax}
+  className="bg-gradient-to-r from-indigo-500 to-indigo-700 text-white px-5 py-2 rounded-lg shadow-md hover:from-indigo-600 hover:to-indigo-800 transition flex items-center justify-center gap-2"
+>
+  {showTax ? "إخفاء الضريبة" : "عرض الضريبة"}
+</button>
+
     </div>
   );
 };

@@ -1,7 +1,8 @@
 // src/components/QuoteTemplate.jsx
 import React from "react";
 
-const QuoteTemplate = ({ data }) => {
+const QuoteTemplate = ({ data, showTax }) => {
+
   return (
     <div
       id="quote"
@@ -104,12 +105,27 @@ const QuoteTemplate = ({ data }) => {
       {/* الإجمالي */}
       <div className="flex justify-end mt-4">
         <table className="w-full border text-center text-sm">
-          <tbody>
-            <tr>
-              <td className="border-2 font-bold p-2 bg-blue-200">الإجمالي قبل الضريبة</td>
-              <td className="border-2 p-2">{data.subtotal}</td>
-            </tr>
-          </tbody>
+         <tbody>
+  <tr>
+    <td className="border-2 font-bold p-2 bg-blue-200">الإجمالي قبل الضريبة</td>
+    <td className="border-2 p-2">{data.subtotal.toFixed(2)}</td>
+  </tr>
+
+  {showTax && (
+    <>
+      <tr>
+        <td className="border-2 font-bold p-2 bg-blue-100">قيمة الضريبة ({data.vat_rate}%)</td>
+        <td className="border-2 p-2">{data.vat_amount.toFixed(2)}</td>
+      </tr>
+      <tr>
+        <td className="border-2 font-bold p-2 bg-blue-300">الإجمالي بعد الضريبة</td>
+        <td className="border-2 p-2">{data.total.toFixed(2)}</td>
+      </tr>
+    </>
+  )}
+</tbody>
+
+
         </table>
       </div>
 

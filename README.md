@@ -1,6 +1,5 @@
 
-
-````markdown
+```markdown
 # Quotes & Reports Management App
 
 A professional **React** application for creating, editing, and managing quotes and reports. This project allows users to:
@@ -13,9 +12,7 @@ A professional **React** application for creating, editing, and managing quotes 
 - Attach and manage files using **Firebase Storage**.  
 
 ---
-
 ## Features
-
 - ✅ Add, edit, and delete quotes.  
 - ✅ Dynamic calculation of totals and VAT.  
 - ✅ Save all data securely in Firebase.  
@@ -26,21 +23,16 @@ A professional **React** application for creating, editing, and managing quotes 
 ---
 
 ## Screenshots
-
 ### Dashboard / Main Page
-
 ![Dashboard](screenshots/dashboard.png)
 
 ### Create Quote
-
 ![Create Quote](screenshots/create-quote.png)
 
 ### Edit Quote
-
 ![Edit Quote](screenshots/edit-quote.png)
 
 ### Generated PDF
-
 ![PDF Preview](screenshots/pdf-preview.png)
 
 > Replace the links above (`screenshots/...`) with your actual screenshot paths.
@@ -79,7 +71,7 @@ pnpm install
 4. Run the project:
 
 ```bash
-pnpm run dev
+pnpm run dev 
 ```
 
 ---
