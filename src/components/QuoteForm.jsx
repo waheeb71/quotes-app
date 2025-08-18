@@ -171,6 +171,8 @@ const QuoteForm = () => {
       if (style.color.includes("oklch")) el.style.color = "#000000";
       if (style.backgroundColor.includes("oklch"))
         el.style.backgroundColor = "#ffffff";
+
+   
     });
 
     // الانتظار لتحميل كل الصور

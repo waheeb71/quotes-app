@@ -18,7 +18,7 @@ const QuoteTemplate = ({ data, showTax }) => {
     />
   </div>
     {/* الترويسة */}
-<div className="border-2 p- flex items-center justify-evenly flex-nowrap bg-white">
+<div className="border-1 p-2 flex items-center justify-evenly flex-nowrap bg-white">
   
   {/* يمين (بيانات الشركة) */}
   <div className="text-right text-xs leading-4" style={{ width: '180px', minWidth: '180px' }}>
@@ -51,26 +51,26 @@ const QuoteTemplate = ({ data, showTax }) => {
 </div>
 <div className="grid grid-cols-2 gap-15 my-3 text-[8px]">
   {/* بيانات العميل */}
-  <table className="w-full border text-center text-[8px]">
-    <tbody className="leading-tight">
+  <table className="w-full border text-center align-top text-[8px]" style={{ verticalAlign: 'top' }}>
+    <tbody className="leading-tight" style={{ verticalAlign: 'top' }}>
       <tr>
-        <th className="border p-1 bg-blue-200 whitespace-nowrap" style={{ verticalAlign: 'top' }}>اسم العميل</th>
-        <td className="border p-1 leading-tight break-words" style={{ verticalAlign: 'top' }}>{data.customer_name}</td>
+        <th className="border p-1 bg-blue-200 whitespace-nowrap align-top" style={{ verticalAlign: 'top' }}>اسم العميل</th>
+        <td className="border p-1 leading-tight break-words align-top" style={{ verticalAlign: 'top' }}>{data.customer_name}</td>
       </tr>
       <tr>
-        <th className="border p-1 bg-blue-200 whitespace-nowrap" style={{ verticalAlign: 'top' }}>الرقم الضريبي</th>
+        <th className="border p-1 bg-blue-200 whitespace-nowrap align-top" style={{ verticalAlign: 'top' }}>الرقم الضريبي</th>
         <td className="border p-1 leading-tight break-words" style={{ verticalAlign: 'top' }}>{data.customer_tax_number}</td>
       </tr>
       <tr>
-        <th className="border p-1 bg-blue-200 whitespace-nowrap" style={{ verticalAlign: 'top' }}>رقم التواصل</th>
-        <td className="border p-1 leading-tight break-words" style={{ verticalAlign: 'top' }}>{data.customer_phone}</td>
+        <th className="border p-1 bg-blue-200 whitespace-nowrap align-top" style={{ verticalAlign: 'top' }}>رقم التواصل</th>
+        <td className="border p-1 leading-tight break-words align-top" style={{ verticalAlign: 'top' }}>{data.customer_phone}</td>
       </tr>
     </tbody>
   </table>
 
   {/* بيانات العرض */}
-  <table className="border text-center text-[6px]">
-    <tbody className="leading-tight">
+  <table className="border text-center text-[6px]" style={{ verticalAlign: 'top' }}>
+    <tbody className="leading-tight" style={{ verticalAlign: 'top' }}>
       <tr>
         <th className="border p-1 w-[100px] bg-blue-200" style={{ verticalAlign: 'top' }}>رقم العرض</th>
         <td className="border p-1" style={{ verticalAlign: 'top' }}>{data.quote_number}</td>
@@ -86,28 +86,29 @@ const QuoteTemplate = ({ data, showTax }) => {
 
 
    {/* جدول المنتجات */}
-<table className="w-full border text-center text-[8px] table-auto">
-  <thead className="bg-gray-200">
+<table className="w-full border text-center table-auto">
+  <thead className="bg-gray-200 text-[8px]">
     <tr>
-      <th className="border-1 p-0 bg-blue-200">م</th>
-      <th className="border-1 p-0 bg-blue-200">البيان</th>
-      <th className="border-1 p-0 w-24 bg-blue-200">الكمية</th>
-      <th className="border-1 p-0 w-24 bg-blue-200">سعر الوحدة</th>
-      <th className="border-1 p-0 w-32 bg-blue-200">الإجمالي</th>
+      <th className="border-1 p-1 bg-blue-200">م</th>
+      <th className="border-1 p-1 bg-blue-200 text-[12px]">البيان</th>
+      <th className="border-1 p-1 bg-blue-200">الكمية</th>
+      <th className="border-1 p-1 bg-blue-200">سعر الوحدة</th>
+      <th className="border-1 p-1 bg-blue-200">الإجمالي</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody className="text-[8px]">
     {data.items.map((item, index) => (
       <tr key={index} className="align-middle">
-        <td className="border-1 p-1">{index + 1}</td>
-        <td className="border-1 p-1 text-center">{item.description}</td>
-        <td className="border-1 p-1">{item.quantity}</td>
-        <td className="border-1 p-1">{item.unit_price}</td>
-        <td className="border-1 p-1">{item.total_price}</td>
+        <td className="border-1 p-1 whitespace-nowrap">{index + 1}</td>
+        <td className="border-1 p-1 text-[12px] whitespace-nowrap">{item.description}</td>
+        <td className="border-1 p-1 whitespace-nowrap">{item.quantity}</td>
+        <td className="border-1 p-1 whitespace-nowrap">{item.unit_price}</td>
+        <td className="border-1 p-1 whitespace-nowrap">{item.total_price}</td>
       </tr>
     ))}
   </tbody>
 </table>
+
 
 
       {/* الإجمالي */}
@@ -115,8 +116,8 @@ const QuoteTemplate = ({ data, showTax }) => {
         <table className="w-full border text-center text-sm">
          <tbody>
   <tr>
-    <td className="border-1 font-bold p-1 bg-blue-200">الإجمالي قبل الضريبة</td>
-    <td className="border-1 p-1">{data.subtotal.toFixed(2)}</td>
+    <td className="border-1 font-bold p-1 bg-blue-200 align-top" style={{ verticalAlign: 'top' }}>الإجمالي قبل الضريبة</td>
+    <td className="border-1 p-1 align-top" style={{ verticalAlign: 'top' }}>{data.subtotal.toFixed(2)}</td>
   </tr>
 
   {showTax && (
