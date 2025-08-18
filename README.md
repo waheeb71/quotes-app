@@ -24,16 +24,18 @@ A professional **React** application for creating, editing, and managing quotes 
 
 ## Screenshots
 ### Dashboard / Main Page
-![Dashboard](screenshots/dashboard.png)
+<!-- Dashboard / Main Page -->
+<img src="screenshots/dashboard.png" alt="Dashboard">
 
-### Create Quote
-![Create Quote](screenshots/create-quote.png)
+<!-- Create Quote -->
+<img src="screenshots/create-quote.png" alt="Create Quote">
 
-### Edit Quote
-![Edit Quote](screenshots/edit-quote.png)
+<!-- Edit Quote -->
+<img src="screenshots/edit-quote.png" alt="Edit Quote">
 
-### Generated PDF
-![PDF Preview](screenshots/pdf-preview.png)
+<!-- Generated PDF -->
+<img src="screenshots/pdf-preview.png" alt="PDF Preview">
+
 
 > Replace the links above (`screenshots/...`) with your actual screenshot paths.
 
