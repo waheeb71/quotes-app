@@ -7,7 +7,7 @@ const QuoteTemplate = ({ data, showTax }) => {
     <div
       id="quote"
       dir="rtl"
-      className="font-[Arial] p-6 bg-white text-black text-sm leading-6"
+      className="font-[Arial] p-4 bg-white text-black text-sm leading-6"
     >
        {/* العلامة المائية */}
   <div className="absolute inset-0 flex items-center justify-center pointer-events-none translate-y-17">
@@ -18,10 +18,10 @@ const QuoteTemplate = ({ data, showTax }) => {
     />
   </div>
     {/* الترويسة */}
-<div className="border-2 p-2 flex items-center justify-evenly flex-nowrap bg-white">
+<div className="border-2 p- flex items-center justify-evenly flex-nowrap bg-white">
   
   {/* يمين (بيانات الشركة) */}
-  <div className="text-right text-xs leading-6" style={{ width: '180px', minWidth: '180px' }}>
+  <div className="text-right text-xs leading-4" style={{ width: '180px', minWidth: '180px' }}>
     <p className="font-bold">{data.company_name}</p>
     <p>
       <span className="font-bold">السجل التجاري:</span> {data.commercial_register}
@@ -32,13 +32,13 @@ const QuoteTemplate = ({ data, showTax }) => {
   </div>
 
   {/* وسط (عنوان عرض سعر) */}
+<div className="text-center flex-1 ml-21" style={{ minWidth: '50px' }}>
+  <h2 className="text-xs font-bold underline">عرض سعر</h2>
+</div>
 
-  <div className="text-center flex-1" style={{ minWidth: '100px' }}>
-    <h2 className="text-sm font-bold underline">عرض سعر</h2>
-  </div>
 
   {/* يسار (الشعار) */}
-  <div className="flex-shrink-0" style={{ width: '100px' }}>
+  <div className="flex-shrink-0" style={{ width: '50px' }}>
    <img
   src={data.company_logo || "/logoa.png"}
   alt="شعار"
@@ -49,74 +49,74 @@ const QuoteTemplate = ({ data, showTax }) => {
   
 
 </div>
+<div className="grid grid-cols-2 gap-15 my-3 text-[8px]">
+  {/* بيانات العميل */}
+  <table className="w-full border text-center text-[8px]">
+    <tbody className="leading-tight">
+      <tr>
+        <th className="border p-1 bg-blue-200 whitespace-nowrap" style={{ verticalAlign: 'top' }}>اسم العميل</th>
+        <td className="border p-1 leading-tight break-words" style={{ verticalAlign: 'top' }}>{data.customer_name}</td>
+      </tr>
+      <tr>
+        <th className="border p-1 bg-blue-200 whitespace-nowrap" style={{ verticalAlign: 'top' }}>الرقم الضريبي</th>
+        <td className="border p-1 leading-tight break-words" style={{ verticalAlign: 'top' }}>{data.customer_tax_number}</td>
+      </tr>
+      <tr>
+        <th className="border p-1 bg-blue-200 whitespace-nowrap" style={{ verticalAlign: 'top' }}>رقم التواصل</th>
+        <td className="border p-1 leading-tight break-words" style={{ verticalAlign: 'top' }}>{data.customer_phone}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  {/* بيانات العرض */}
+  <table className="border text-center text-[6px]">
+    <tbody className="leading-tight">
+      <tr>
+        <th className="border p-1 w-[100px] bg-blue-200" style={{ verticalAlign: 'top' }}>رقم العرض</th>
+        <td className="border p-1" style={{ verticalAlign: 'top' }}>{data.quote_number}</td>
+      </tr>
+      <tr>
+        <th className="border p-1 w-[100px] bg-blue-200" style={{ verticalAlign: 'top' }}>تاريخ العرض</th>
+        <td className="border p-1" style={{ verticalAlign: 'top' }}>{data.quote_date}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 
-      {/* بيانات العميل والعرض */}
-      <div className="grid grid-cols-2 gap-4 my-6 text-sm">
-        {/* بيانات العميل */}
-        <table className="w-full border text-right">
-          <tbody>
-            <tr>
-              <th className="border-2 p-2 w-auto bg-blue-200 ">اسم العميل</th>
-              <td className="border-2 p-2">{data.customer_name}</td>
-            </tr>
-            <tr>
-              <th className="border-2 p-2 w-auto bg-blue-200 ">الرقم الضريبي</th>
-              <td className="border-2 p-2">{data.customer_tax_number}</td>
-            </tr>
-            <tr>
-              <th className="border-2 p-2 w-auto bg-blue-200">رقم التواصل</th>
-              <td className="border-2 p-2">{data.customer_phone}</td>
-            </tr>
-          </tbody>
-        </table>
 
-        {/* بيانات العرض */}
-        <table className="w-full border text-right">
-          <tbody>
-            <tr>
-              <th className="border-2 p-2 w-auto bg-blue-200">رقم العرض</th>
-              <td className="border-2 p-2">{data.quote_number}</td>
-            </tr>
-            <tr>
-              <th className="border-2 p-2 w-auto bg-blue-200">تاريخ العرض</th>
-              <td className="border-2 p-2">{data.quote_date}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+   {/* جدول المنتجات */}
+<table className="w-full border text-center text-[8px] table-auto">
+  <thead className="bg-gray-200">
+    <tr>
+      <th className="border-1 p-0 bg-blue-200">م</th>
+      <th className="border-1 p-0 bg-blue-200">البيان</th>
+      <th className="border-1 p-0 w-24 bg-blue-200">الكمية</th>
+      <th className="border-1 p-0 w-24 bg-blue-200">سعر الوحدة</th>
+      <th className="border-1 p-0 w-32 bg-blue-200">الإجمالي</th>
+    </tr>
+  </thead>
+  <tbody>
+    {data.items.map((item, index) => (
+      <tr key={index} className="align-middle">
+        <td className="border-1 p-1">{index + 1}</td>
+        <td className="border-1 p-1 text-center">{item.description}</td>
+        <td className="border-1 p-1">{item.quantity}</td>
+        <td className="border-1 p-1">{item.unit_price}</td>
+        <td className="border-1 p-1">{item.total_price}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
 
-      {/* جدول المنتجات */}
-      <table className="w-full border text-center text-sm">
-        <thead className="bg-gray-200">
-          <tr>
-            <th className="border-2 p-2 w-auto bg-blue-200">م</th>
-            <th className="border-2 p-2 w-auto bg-blue-200">البيان</th>
-            <th className="border-2 p-2 w-24 bg-blue-200">الكمية</th>
-            <th className="border-2 p-2 w-24 bg-blue-200">سعر الوحدة</th>
-            <th className="border-2 p-2 w-32 bg-blue-200">الإجمالي</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.items.map((item, index) => (
-            <tr key={index}>
-              <td className="border-2 p-2 w-auto">{index + 1}</td>
-              <td className="border-2 p-2 w-autotext-right">{item.description}</td>
-              <td className="border-2 p-2 w-auto">{item.quantity}</td>
-              <td className="border-2 p-2 w-auto">{item.unit_price}</td>
-              <td className="border-2 p-2 w-auto">{item.total_price}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
 
       {/* الإجمالي */}
       <div className="flex justify-end mt-4">
         <table className="w-full border text-center text-sm">
          <tbody>
   <tr>
-    <td className="border-2 font-bold p-2 bg-blue-200">الإجمالي قبل الضريبة</td>
-    <td className="border-2 p-2">{data.subtotal.toFixed(2)}</td>
+    <td className="border-1 font-bold p-1 bg-blue-200">الإجمالي قبل الضريبة</td>
+    <td className="border-1 p-1">{data.subtotal.toFixed(2)}</td>
   </tr>
 
   {showTax && (

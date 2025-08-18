@@ -190,7 +190,8 @@ const QuoteForm = () => {
     await waitForImages(clone);
 
     // إنشاء canvas من HTML
-    const canvas = await html2canvas(clone, { scale: 2, useCORS: true });
+   
+     const canvas = await html2canvas(clone, { scale: 2.5, useCORS: true });
     const imgData = canvas.toDataURL("image/png");
 
     // إنشاء PDF بحجم A4
