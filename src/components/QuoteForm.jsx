@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { db, storage } from "../firebaseConfig";
 import { doc, getDoc, updateDoc, collection, addDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { useParams } from "react-router-dom";
+
+import { useNavigate, Link,useParams } from "react-router-dom";
 import QuoteTemplate from "./QuoteTemplate";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
@@ -182,8 +183,24 @@ const QuoteForm = () => {
 
   return (
     <div className="p-6 bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen rounded-xl shadow-lg">
-      <h1 className="text-2xl font-bold mb-6 text-indigo-600">📝 إنشاء عرض سعر</h1>
+    
+ <div className="flex justify-between items-center mb-6">
+        {/* زر الرجوع الواضح والجميل */}
+       
+        <h1 className="text-2xl font-bold text-indigo-600">
+         إنشاء عرض سعر
+        </h1>
 
+         <Link 
+          to="/" 
+          className="inline-flex items-center gap-2 text-indigo-600 bg-indigo-50 hover:bg-indigo-100 p-2 rounded-lg transition-colors duration-200"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 rtl:rotate-180" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
+          </svg>
+          <span className="font-medium">العودة للصفحة الرئيسية</span>
+        </Link>
+      </div>
       {/* بيانات العميل */}
       <div className="space-y-3">
         <input
