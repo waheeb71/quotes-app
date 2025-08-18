@@ -14,7 +14,7 @@ const QuoteForm = () => {
     company_name: "مؤسسة القوة العاشرة للمقاولات العامة",
     commercial_register: "4030202520",
     tax_number: "301252163700003",
-    company_logo: "./logoa.png",
+    company_logo: "/logoa.png",
     customer_name: "",
     customer_tax_number: "",
     customer_phone: "",
@@ -27,7 +27,7 @@ const QuoteForm = () => {
     total: 0,
     notes: "",
     iban: "SA2710000010700000165109"
-    
+
   });
 
 useEffect(() => {
@@ -52,10 +52,11 @@ useEffect(() => {
  
   const saveToFirebase = async () => {
     try {
+       const quoteData = { ...data, company_logo: "/logoa.png" }; 
       if (quoteId) {
         // تحديث
-        const docRef = doc(db, "quotes", quoteId);
-        await updateDoc(docRef, data);
+       await updateDoc(doc(db, "quotes", quoteId), quoteData);
+      
         alert("✅ تم تحديث عرض السعر!");
       } else {
         // حفظ جديد
@@ -91,7 +92,18 @@ useEffect(() => {
   };
 
  
-
+const waitForImages = (element) => {
+  const images = element.querySelectorAll("img");
+  return Promise.all(
+    Array.from(images).map(
+      img =>
+        new Promise(resolve => {
+          if (img.complete) resolve();
+          else img.onload = img.onerror = resolve;
+        })
+    )
+  );
+};
 
 const downloadPDF = async () => {
   await saveToFirebase();
@@ -138,21 +150,10 @@ const downloadPDF = async () => {
   });
 
   // الانتظار لتحميل كل الصور
-  const waitForImages = (element) => {
-    const images = element.querySelectorAll("img");
-    return Promise.all(
-      Array.from(images).map(
-        img =>
-          new Promise(resolve => {
-            if (img.complete) resolve();
-            else img.onload = img.onerror = resolve;
-          })
-      )
-    );
-  };
+
+
 
   await waitForImages(clone);
-
   // إنشاء canvas وتحويله إلى PDF
   const canvas = await html2canvas(clone, { scale: 2, useCORS: true });
   const imgData = canvas.toDataURL("image/png");

@@ -30,8 +30,14 @@ const QuoteTemplate = ({ data }) => {
 
   {/* يسار (الشعار) */}
   <div className="flex-shrink-0" style={{ width: '100px' }}>
-    <img src="./logoa.png" alt="شعار" className="w-28 h-auto" />
+   <img
+  src={data.company_logo || "/logoa.png"}
+  alt="شعار"
+  className="w-28 h-auto"
+/>
+
   </div>
+  
 
 </div>
 
