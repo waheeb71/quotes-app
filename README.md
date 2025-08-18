@@ -1,5 +1,5 @@
 
-````markdown
+```markdown
 # Quotes & Reports Management App
 
 A professional **React** application for creating, editing, and managing quotes and reports. This project allows users to:
@@ -21,8 +21,8 @@ A professional **React** application for creating, editing, and managing quotes 
 - ✅ RTL (Right-to-Left) support for Arabic text.  
 
 ---
-## Screenshots
 
+## Screenshots
 ### Dashboard / Main Page
 ![Dashboard](screenshots/dashboard.png)
 
@@ -54,7 +54,7 @@ A professional **React** application for creating, editing, and managing quotes 
 1. Clone the repository:
 
 ```bash
-git clone git@github.com:YourUsername/quotes-app.git
+git clone git@github.com:waheeb71/quotes-app.git
 ````
 
 2. Install dependencies:
