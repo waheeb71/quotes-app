@@ -36,3 +36,16 @@ A professional **React** application for creating, editing, and managing quotes 
 git clone git@github.com:waheeb71/quotes-app.git
 cd quotes-app
 pnpm inst
+
+---
+
+##  Contact:
+For questions or support, contact me via:
+- Telegram: [@SyberSc71](https://t.me/SyberSc71)
+- Telegram: [@WAT4F](https://t.me/WAT4F)
+- GitHub: [waheeb71](https://github.com/waheeb71)
+- GitHub2: [cyberlangdev](https://github.com/cyberlangdev)
+- **Location:** I am from Yemen, Taiz.
+- **YouTube Channel:** [Cyber Code](https://www.youtube.com/@cyber_code1)
+- **X (formerly Twitter):** [@wa__cys](https://x.com/wa__cys)
+
