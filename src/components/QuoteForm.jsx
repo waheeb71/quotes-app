@@ -128,20 +128,25 @@ const QuoteForm = () => {
   };
 
   const downloadPDF = async () => {
+  try {
+    // أولاً حفظ البيانات
     await saveToFirebase();
+
     const element = document.getElementById("quote");
 
+    // إنشاء نسخة clone لتعديلها قبل html2canvas
     const clone = element.cloneNode(true);
     clone.style.position = "fixed";
     clone.style.top = "-10000px";
     clone.style.direction = "rtl";
     document.body.appendChild(clone);
 
+    // خريطة ألوان Tailwind → ألوان صلبة
     const colorMap = {
       "bg-blue-200": "#bfdbfe",
       "bg-gray-200": "#e5e7eb",
       "bg-gray-100": "#f3f4f6",
-      "bg-white": "#ffffffff",
+      "bg-white": "#ffffff",
       "bg-indigo-500": "#6366f1",
       "bg-indigo-600": "#4f46e5",
       "bg-indigo-700": "#4338ca",
@@ -153,6 +158,7 @@ const QuoteForm = () => {
       "text-blue-600": "#2563eb",
     };
 
+    // تحويل كل ألوان Tailwind إلى صلبة
     clone.querySelectorAll("*").forEach((el) => {
       el.classList.forEach((cls) => {
         if (colorMap[cls]) {
@@ -167,19 +173,50 @@ const QuoteForm = () => {
         el.style.backgroundColor = "#ffffff";
     });
 
+    // الانتظار لتحميل كل الصور
+    const waitForImages = (element) => {
+      const images = element.querySelectorAll("img");
+      return Promise.all(
+        Array.from(images).map(
+          (img) =>
+            new Promise((resolve) => {
+              if (img.complete) resolve();
+              else img.onload = img.onerror = resolve;
+            })
+        )
+      );
+    };
+
     await waitForImages(clone);
 
+    // إنشاء canvas من HTML
     const canvas = await html2canvas(clone, { scale: 2, useCORS: true });
     const imgData = canvas.toDataURL("image/png");
+
+    // إنشاء PDF بحجم A4
     const pdf = new jsPDF("p", "mm", "a4");
-    const imgProps = pdf.getImageProperties(imgData);
     const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+    const pdfHeight = pdf.internal.pageSize.getHeight();
+
+    // إضافة محتوى العرض
+    const imgProps = pdf.getImageProperties(imgData);
+    const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
+    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, imgHeight);
+
+    // إضافة العلامة المائية في منتصف الصفحة
+   
+
+    // حفظ PDF
     pdf.save(`quote-${Date.now()}.pdf`);
 
+    // إزالة النسخة المؤقتة
     document.body.removeChild(clone);
-  };
+  } catch (err) {
+    console.error("Error generating PDF:", err);
+    alert("⚠️ خطأ أثناء إنشاء PDF");
+  }
+};
+
 
   return (
     <div className="p-6 bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen rounded-xl shadow-lg">
