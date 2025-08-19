@@ -7,7 +7,7 @@ const QuoteActions = ({ saveToFirebase, downloadPDF, htmlContent, showTax, toggl
   const handleDownload = async () => {
     setLoadingPDF(true);
     try {
-      await downloadPDF(htmlContent); // استخدم HTML مباشرة
+      await downloadPDF(htmlContent); 
     } finally {
       setLoadingPDF(false);
     }

@@ -8,7 +8,7 @@ const QuotesList = () => {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
 
-  // دالة لجلب البيانات من فايربيز
+
   const fetchQuotes = async () => {
     try {
       const querySnapshot = await getDocs(collection(db, "quotes"));
@@ -27,14 +27,14 @@ const QuotesList = () => {
     fetchQuotes();
   }, []);
 
-  // دالة لحذف عرض سعر
+ 
   const handleDelete = async (e, id) => {
-    e.stopPropagation(); // منع انتقال المستخدم لصفحة التعديل
+    e.stopPropagation(); 
     const confirmDelete = window.confirm("هل أنت متأكد من حذف هذا العرض؟");
     if (confirmDelete) {
       try {
         await deleteDoc(doc(db, "quotes", id));
-        // تحديث القائمة بعد الحذف
+      
         setQuotes((prevQuotes) => prevQuotes.filter((q) => q.id !== id));
         alert("✅ تم حذف العرض بنجاح!");
       } catch (err) {
@@ -44,14 +44,14 @@ const QuotesList = () => {
     }
   };
 
-  // تصفية العروض بناءً على البحث (تعديل منطق البحث)
+ 
   const filteredQuotes = quotes.filter((q) => {
     if (!search) return true;
     if (!q.customer_name) return false;
     const name = q.customer_name.toLowerCase();
     const query = search.toLowerCase();
 
-    // تحقق إذا كان الاسم يحتوي على سلسلة البحث
+   
     return name.includes(query);
   });
 
