@@ -249,7 +249,7 @@ const downloadPDF = async (htmlContent) => {
     value={item.description}
     onChange={(e) => handleItemChange(i, "description", e.target.value)}
     className="border border-slate-300 rounded-lg p-2 w-full focus:ring-2 focus:ring-indigo-400 resize-y"
-    rows={1}  // يبدأ بصفين ارتفاع
+    rows={1}  
     placeholder="اكتب البيان هنا"
   />
 </label>
