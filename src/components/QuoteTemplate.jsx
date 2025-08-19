@@ -1,166 +1,145 @@
-// src/components/QuoteTemplate.jsx
 import React from "react";
 
 const QuoteTemplate = ({ data, showTax }) => {
+  const htmlContent = `
+<html dir="rtl">
+  <head>
+    <meta charset="UTF-8">
+    <style>
+      body {   font-family: 'Cairo';
+  font-size: 12px; line-height: 1.4; margin: 0; padding: 0; color: #000; background-color: #fff; }
+      .header { display: flex; justify-content: space-between;align-items: center;  padding: 2px; border: 2px solid #000; background-color: #fff; }
+      .header-right { text-align: right; font-size: 12px; display:inline;}
+      .header-center { text-align: center; font-size: 12px; font-weight: bold; text-decoration: underline; margin-top: 50px;  }
+      .header-left img { width: 110px; height: auto; }
+      th, td {
+    border: 1px solid #000;
+    padding: 4px;
+    text-align: center;
+    vertical-align: top;
+    font-size: 10px; /* حجم الخط صغير */
+  }
 
-  return (
-    <div
-      id="quote"
-      dir="rtl"
-      className="font-[Arial] p-4 bg-white text-black text-sm leading-6"
-    >
-       {/* العلامة المائية */}
-  <div className="absolute inset-0 flex items-center justify-center pointer-events-none translate-y-17">
-    <img
-      src="/watermark.png"
-      alt="Watermark"
-      className="w-1/3 opacity-20"
-    />
-  </div>
-    {/* الترويسة */}
-<div className="border-1 p-2 flex items-center justify-evenly flex-nowrap bg-white">
-  
-  {/* يمين (بيانات الشركة) */}
-  <div className="text-right text-xs leading-4" style={{ width: '180px', minWidth: '180px' }}>
-    <p className="font-bold">{data.company_name}</p>
-    <p>
-      <span className="font-bold">السجل التجاري:</span> {data.commercial_register}
-    </p>
-    <p>
-      <span className="font-bold">الرقم الضريبي:</span> {data.tax_number}
-    </p>
-  </div>
+  th {
+    width: 1%; /* يجعل عرض الـ th صغير جدًا حسب المحتوى */
+    white-space: nowrap; /* يمنع كسر السطر داخل الـ th */
+  }
 
-  {/* وسط (عنوان عرض سعر) */}
-<div className="text-center flex-1 ml-21" style={{ minWidth: '50px' }}>
-  <h2 className="text-xs font-bold underline">عرض سعر</h2>
+  td {
+    width: auto; /* يتوسع حسب محتوى الخلية */
+    white-space: nowrap; /* يمنع كسر السطر داخل الـ td */
+  }
+
+      th { background-color: #bfdbfe; }
+      .text-blue { color: #2563eb; }
+      .totals td { font-weight: bold; }
+      .notes { margin-top: 15px; }
+      .signature { margin-top: 10px; text-align: left; }
+
+
+
+    </style>
+  </head>
+  <body>
+    <div id="quote">
+     
+      <div class="header">
+        <div class="header-right">
+         <div ><strong>${data.company_name}</strong></div>
+          <p><strong>السجل التجاري:</strong> ${data.commercial_register}</p>
+          <p><strong>الرقم الضريبي:</strong> ${data.tax_number}</p>
+        </div>
+        <div class="header-center">عرض سعر</div>
+     <div class="header-left">
+<img src="${data.company_logo}" alt="شعار" />
+
 </div>
 
+      </div>
+    <div style="display: flex; gap: 20px;">
 
-  {/* يسار (الشعار) */}
-  <div className="flex-shrink-0" style={{ width: '50px' }}>
-   <img
-  src={data.company_logo || "/logoa.png"}
-  alt="شعار"
-  className="w-28 h-auto"
-/>
-
-  </div>
-  
-
-</div>
-<div className="grid grid-cols-2 gap-15 my-3 text-[8px]">
-  {/* بيانات العميل */}
-  <table className="w-full border text-center align-top text-[8px]" style={{ verticalAlign: 'top' }}>
-    <tbody className="leading-tight" style={{ verticalAlign: 'top' }}>
-      <tr>
-        <th className="border p-1 bg-blue-200 whitespace-nowrap align-top" style={{ verticalAlign: 'top' }}>اسم العميل</th>
-        <td className="border p-1 leading-tight break-words align-top" style={{ verticalAlign: 'top' }}>{data.customer_name}</td>
-      </tr>
-      <tr>
-        <th className="border p-1 bg-blue-200 whitespace-nowrap align-top" style={{ verticalAlign: 'top' }}>الرقم الضريبي</th>
-        <td className="border p-1 leading-tight break-words" style={{ verticalAlign: 'top' }}>{data.customer_tax_number}</td>
-      </tr>
-      <tr>
-        <th className="border p-1 bg-blue-200 whitespace-nowrap align-top" style={{ verticalAlign: 'top' }}>رقم التواصل</th>
-        <td className="border p-1 leading-tight break-words align-top" style={{ verticalAlign: 'top' }}>{data.customer_phone}</td>
-      </tr>
-    </tbody>
-  </table>
-
-  {/* بيانات العرض */}
-  <table className="border text-center text-[6px]" style={{ verticalAlign: 'top' }}>
-    <tbody className="leading-tight" style={{ verticalAlign: 'top' }}>
-      <tr>
-        <th className="border p-1 w-[100px] bg-blue-200" style={{ verticalAlign: 'top' }}>رقم العرض</th>
-        <td className="border p-1" style={{ verticalAlign: 'top' }}>{data.quote_number}</td>
-      </tr>
-      <tr>
-        <th className="border p-1 w-[100px] bg-blue-200" style={{ verticalAlign: 'top' }}>تاريخ العرض</th>
-        <td className="border p-1" style={{ verticalAlign: 'top' }}>{data.quote_date}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-
-
-   {/* جدول المنتجات */}
-<table className="w-full border text-center table-auto">
-  <thead className="bg-gray-200 text-[8px]">
+  <!-- الجدول الأول -->
+<table border="1" style="border-collapse: collapse; width: 45%; float: left; margin-right: 0%;  margin-top: 10px">
     <tr>
-      <th className="border-1 p-1 bg-blue-200">م</th>
-      <th className="border-1 p-1 bg-blue-200 text-[12px]">البيان</th>
-      <th className="border-1 p-1 bg-blue-200">الكمية</th>
-      <th className="border-1 p-1 bg-blue-200">سعر الوحدة</th>
-      <th className="border-1 p-1 bg-blue-200">الإجمالي</th>
+      <th>اسم العميل</th>
+      <td>${data.customer_name}</td>
     </tr>
-  </thead>
-  <tbody className="text-[8px]">
-    {data.items.map((item, index) => (
-      <tr key={index} className="align-middle">
-        <td className="border-1 p-1 whitespace-nowrap">{index + 1}</td>
-        <td className="border-1 p-1 text-[12px] whitespace-nowrap">{item.description}</td>
-        <td className="border-1 p-1 whitespace-nowrap">{item.quantity}</td>
-        <td className="border-1 p-1 whitespace-nowrap">{item.unit_price}</td>
-        <td className="border-1 p-1 whitespace-nowrap">{item.total_price}</td>
-      </tr>
-    ))}
-  </tbody>
-</table>
+    <tr>
+      <th>الرقم الضريبي</th>
+      <td>${data.customer_tax_number}</td>
+    </tr>
+    <tr>
+      <th>رقم التواصل</th>
+      <td>${data.customer_phone}</td>
+    </tr>
+  </table>
 
+  <!-- الجدول الثاني -->
+<table border="1" style="border-collapse: collapse; width: 45%;  margin-right: 17%; margin-top: 10px">
+    <tr>
+      <th>رقم العرض</th>
+      <td>${data.quote_number}</td>
+    </tr>
+    <tr>
+      <th>تاريخ العرض</th>
+      <td>${data.quote_date}</td>
+    </tr>
+   
+  </table>
 
+</div>
 
-      {/* الإجمالي */}
-      <div className="flex justify-end mt-4">
-        <table className="w-full border text-center text-sm">
-         <tbody>
-  <tr>
-    <td className="border-1 font-bold p-1 bg-blue-200 align-top" style={{ verticalAlign: 'top' }}>الإجمالي قبل الضريبة</td>
-    <td className="border-1 p-1 align-top" style={{ verticalAlign: 'top' }}>{data.subtotal.toFixed(2)}</td>
-  </tr>
-
-  {showTax && (
-    <>
-      <tr>
-        <td className="border-2 font-bold p-2 bg-blue-100">قيمة الضريبة ({data.vat_rate}%)</td>
-        <td className="border-2 p-2">{data.vat_amount.toFixed(2)}</td>
-      </tr>
-      <tr>
-        <td className="border-2 font-bold p-2 bg-blue-300">الإجمالي بعد الضريبة</td>
-        <td className="border-2 p-2">{data.total.toFixed(2)}</td>
-      </tr>
-    </>
-  )}
-</tbody>
-
-
-        </table>
-      </div>
-
-      {/* الملاحظات + معلومات البنك */}
-      <div className="mt-6">
-{data.notes && (
-  <p className="font-bold mb-4">
-    ملاحظات: {data.notes}
-  </p>
-)}
-
+      <table style="border-collapse: collapse; width: 100%; margin-top: 10px;">
+        <thead>
+          <tr>
+            <th>م</th>
+            <th>البيان</th>
+            <th>الكمية</th>
+            <th>سعر الوحدة</th>
+            <th>الإجمالي</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${data.items.map((item, index) => `
+            <tr>
+              <td>${index + 1}</td>
+              <td>${item.description}</td>
+              <td>${item.quantity}</td>
+              <td>${item.unit_price}</td>
+              <td>${item.total_price}</td>
+            </tr>`).join("")}
+        </tbody>
+      </table>
+      <table  style="border-collapse: collapse; width: 100%; margin-top: 10px;font-weight: bold">
+        <tr>
+          <td style="font-weight: bold;background-color: #bfdbfe;">الإجمالي قبل الضريبة</td>
+          <td>${data.subtotal.toFixed(2)}</td>
+        </tr>
+        ${showTax ? `
+          <tr>
+            <td style="font-weight: bold;background-color: #bfdbfe;">قيمة الضريبة (${data.vat_rate}%)</td>
+            <td>${data.vat_amount.toFixed(2)}</td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold;background-color: #bfdbfe;">الإجمالي بعد الضريبة</td>
+            <td>${data.total.toFixed(2)}</td>
+          </tr>` : ''}
+      </table>
+      <div class="notes">
+        ${data.notes ? `<p><strong>ملاحظات:</strong> ${data.notes}</p>` : ''}
         <p>للتحويل على حساب المؤسسة (IBAN):</p>
-    <p className="font-bold">
-  البنك الأهلي: <span className="text-blue-600">{data.iban}</span>
-</p>
-
-
+        <p class="text-blue"><strong>${data.iban}</strong></p>
       </div>
-
-      {/* التوقيع */}
-      <div className="mt-1 text-left">
+      <div class="signature">
         <p>ولكم منا جزيل الشكر والتقدير ............</p>
-        <p className="mt-2 font-bold">{data.company_name}</p>
+        <p><strong>${data.company_name}</strong></p>
       </div>
     </div>
-  );
+  </body>
+</html>
+`;
+
+  return <div dangerouslySetInnerHTML={{ __html: htmlContent }} />;
 };
 
 export default QuoteTemplate;

@@ -1,9 +1,18 @@
 import React, { useState } from "react";
 
-const QuoteActions = ({ saveToFirebase, downloadPDF, showTax, toggleShowTax }) => {
-
+const QuoteActions = ({ saveToFirebase, downloadPDF, htmlContent, showTax, toggleShowTax }) => {
   const [loadingFirebase, setLoadingFirebase] = useState(false);
   const [loadingPDF, setLoadingPDF] = useState(false);
+
+  const handleDownload = async () => {
+    setLoadingPDF(true);
+    try {
+      await downloadPDF(htmlContent); // استخدم HTML مباشرة
+    } finally {
+      setLoadingPDF(false);
+    }
+  };
+
 
   const handleSave = async () => {
     setLoadingFirebase(true);
@@ -14,14 +23,7 @@ const QuoteActions = ({ saveToFirebase, downloadPDF, showTax, toggleShowTax }) =
     }
   };
 
-  const handleDownload = async () => {
-    setLoadingPDF(true);
-    try {
-      await downloadPDF();
-    } finally {
-      setLoadingPDF(false);
-    }
-  };
+
 
   return (
     <div className="flex gap-3 mt-6">
