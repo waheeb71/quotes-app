@@ -112,15 +112,15 @@ const QuoteTemplate = ({ data, showTax }) => {
 <table border="1" style="border-collapse: collapse; width: 45%; float: left; margin-right: 0%;  margin-top: 10px">
     <tr>
       <th>اسم العميل</th>
-      <td>${data.customer_name}</td>
+      <td style="font-weight: bold;">${data.customer_name}</td>
     </tr>
     <tr>
       <th>الرقم الضريبي</th>
-      <td>${data.customer_tax_number}</td>
+      <td style="font-weight: bold;">${data.customer_tax_number}</td>
     </tr>
     <tr>
       <th>رقم التواصل</th>
-      <td>${data.customer_phone}</td>
+      <td style="font-weight: bold;">${data.customer_phone}</td>
     </tr>
   </table>
 
@@ -128,11 +128,11 @@ const QuoteTemplate = ({ data, showTax }) => {
 <table border="1" style="border-collapse: collapse; width: 45%;  margin-right: 17%; margin-top: 10px">
     <tr>
       <th>رقم العرض</th>
-      <td>${data.quote_number}</td>
+      <td style="font-weight: bold;">${data.quote_number}</td>
     </tr>
     <tr>
       <th>تاريخ العرض</th>
-      <td>${data.quote_date}</td>
+      <td style="font-weight: bold;">${data.quote_date}</td>
     </tr>
    
   </table>
@@ -168,31 +168,33 @@ const QuoteTemplate = ({ data, showTax }) => {
               <td>${item.description}</td>
               <td>${item.quantity}</td>
               <td>${item.unit_price}</td>
-              <td>${item.total_price}</td>
+              <td style="font-weight: bold;">${item.total_price}</td>
             </tr>`).join("")}
         </tbody>
       </table>
       <table  style="border-collapse: collapse; width: 100%; margin-top: 10px;font-weight: bold">
         <tr>
-          <td style="font-weight: bold;background-color: rgba(191, 219, 254, 0.5);">الإجمالي قبل الضريبة</td>
-          <td>${data.subtotal.toFixed(2)}</td>
+          <td style="font-weight: bold;background-color: rgba(191, 219, 254, 0.5); width: 30%;">الإجمالي قبل الضريبة</td>
+          <td style="text-align: left;">${data.subtotal.toFixed(2)}</td>
         </tr>
         ${showTax ? `
           <tr>
-            <td style="font-weight: bold;background-color: rgba(191, 219, 254, 0.5);">قيمة الضريبة (${data.vat_rate}%)</td>
-            <td>${data.vat_amount.toFixed(2)}</td>
+            <td style="font-weight: bold;background-color: rgba(191, 219, 254, 0.5);width: 30%;">قيمة الضريبة (${data.vat_rate}%)</td>
+            <td style="text-align: left;">${data.vat_amount.toFixed(2)}</td>
           </tr>
           <tr>
-            <td style="font-weight: bold; background-color: rgba(191, 219, 254, 0.5);">الإجمالي بعد الضريبة</td>
-            <td>${data.total.toFixed(2)}</td>
+            <td style="font-weight: bold; background-color: rgba(191, 219, 254, 0.5);width: 30%;">الإجمالي بعد الضريبة</td>
+            <td style="text-align: left;">${data.total.toFixed(2)}</td>
           </tr>` : ''}
       </table>
+      
       <div class="notes">
         ${data.notes ? `<p><strong>ملاحظات:</strong> ${data.notes}</p>` : ''}
         <p>للتحويل على حساب المؤسسة (IBAN):</p>
         <p class="text-blue"><strong>${data.iban}</strong></p>
       </div>
-      <div class="signature">
+
+      <div class="signature" style="margin-top: 10%;">
         <p>ولكم منا جزيل الشكر والتقدير ............</p>
         <p><strong>${data.company_name}</strong></p>
       </div>
