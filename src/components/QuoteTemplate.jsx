@@ -1,33 +1,70 @@
 import React from "react";
 
 const QuoteTemplate = ({ data, showTax }) => {
+  
   const htmlContent = `
 <html dir="rtl">
   <head>
     <meta charset="UTF-8">
     <style>
-      body {   font-family: 'Cairo';
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
+      body {      font-family: 'Cairo', sans-serif;
   font-size: 12px; line-height: 1.4; margin: 0; padding: 0; color: #000; background-color: #fff; }
-      .header { display: flex; justify-content: space-between;align-items: center;  padding: 2px; border: 2px solid #000; background-color: #fff; }
-      .header-right { text-align: right; font-size: 12px; display:inline;}
-      .header-center { text-align: center; font-size: 12px; font-weight: bold; text-decoration: underline; margin-top: 50px;  }
-      .header-left img { width: 110px; height: auto; }
+     .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 2px;
+  border: 2px solid #000;
+  background-color: #fff;
+}
+
+.header-right {
+  text-align: right;
+  font-size: 12px;
+
+}
+
+.header-left img {
+
+  width: 80px;
+  height: auto;
+}
+
+.header-center {
+  flex: 0 0 100%;      
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 0px;
+  border-bottom: 2px solid #000000ff;
+   padding-bottom: 0;     
+  padding: 0;            
+  background:  #dbe5f1ff;;     
+  color: #000;             
+  border-radius: 6px; 
+
+}
+
+
       th, td {
     border: 1px solid #000;
     padding: 4px;
     text-align: center;
     vertical-align: top;
-    font-size: 10px; /* حجم الخط صغير */
+    font-size: 10px; 
   }
 
   th {
-    width: 1%; /* يجعل عرض الـ th صغير جدًا حسب المحتوى */
-    white-space: nowrap; /* يمنع كسر السطر داخل الـ th */
+    width: 1%; 
+    white-space: nowrap;
   }
 
   td {
-    width: auto; /* يتوسع حسب محتوى الخلية */
-    white-space: nowrap; /* يمنع كسر السطر داخل الـ td */
+    width: auto; 
+    white-space: nowrap;
   }
 
       th { background-color: #bfdbfe; }
@@ -38,22 +75,35 @@ const QuoteTemplate = ({ data, showTax }) => {
 
 
 
+     h2 { 
+     margin-top: 1rem; 
+      margin-bottom: 0rem; 
+      background:#bfdbfe;
+      color: #040404ff;          
+      padding: 0.1rem 1.5rem; 
+      border-radius: 8px;  
+      display: inline-block; 
+    }
+    .box { padding: 0rem 0.25rem; border: 1px solid #a36969ff; border-radius: 12px; background: #fafafa; }
     </style>
   </head>
   <body>
     <div id="quote">
      
-      <div class="header">
-        <div class="header-right">
-         <div ><strong>${data.company_name}</strong></div>
-          <p><strong>السجل التجاري:</strong> ${data.commercial_register}</p>
-          <p><strong>الرقم الضريبي:</strong> ${data.tax_number}</p>
-        </div>
-        <div class="header-center">عرض سعر</div>
-     <div class="header-left">
-<img src="${data.company_logo}" alt="شعار" />
+     <div class="header">
+  <div class="header-right">
+    <div><strong>${data.company_name}</strong></div>
+    <p><strong>السجل التجاري:</strong> ${data.commercial_register}</p>
+    <p><strong>الرقم الضريبي:</strong> ${data.tax_number}</p>
+  </div>
+
+  <div class="header-left">
+    <img src="${data.company_logo}" alt="شعار" />
+  </div>
+  <h1 class="header-center">عرض سعر</h1>
 
 </div>
+
 
       </div>
     <div style="display: flex; gap: 20px;">
@@ -87,7 +137,19 @@ const QuoteTemplate = ({ data, showTax }) => {
    
   </table>
 
+
 </div>
+ <section>
+    <h2>مقدمة</h2>
+  <div class="box">
+ 
+    <p>
+      حيث إن <strong>مؤسسة القوة العاشرة للمقاولات العامة</strong>
+      تقوم بأعمال تشمل الزجاج، والستيل، والألمنيوم، ولديها خبرة عالية في هذا المجال.
+    </p>
+  </div>
+</section>
+
 
       <table style="border-collapse: collapse; width: 100%; margin-top: 10px;">
         <thead>
