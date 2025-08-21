@@ -175,16 +175,16 @@ const QuoteTemplate = ({ data, showTax }) => {
       <table  style="border-collapse: collapse; width: 100%; margin-top: 10px;font-weight: bold">
         <tr>
           <td style="font-weight: bold;background-color: rgba(191, 219, 254, 0.5); width: 30%;">الإجمالي قبل الضريبة</td>
-          <td style="text-align: left;">${data.subtotal.toFixed(2)}</td>
+          <td style="text-align: left;padding-left: 24px;">${data.subtotal.toFixed(2)}</td>
         </tr>
         ${showTax ? `
           <tr>
             <td style="font-weight: bold;background-color: rgba(191, 219, 254, 0.5);width: 30%;">قيمة الضريبة (${data.vat_rate}%)</td>
-            <td style="text-align: left;">${data.vat_amount.toFixed(2)}</td>
+            <td style="text-align: left;padding-left: 24px;">${data.vat_amount.toFixed(2)}</td>
           </tr>
           <tr>
             <td style="font-weight: bold; background-color: rgba(191, 219, 254, 0.5);width: 30%;">الإجمالي بعد الضريبة</td>
-            <td style="text-align: left;">${data.total.toFixed(2)}</td>
+            <td style="text-align: left;padding-left: 24px;">${data.total.toFixed(2)}</td>
           </tr>` : ''}
       </table>
       
