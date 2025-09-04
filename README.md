@@ -89,4 +89,4 @@ For questions or support, contact me via:
 ## Author / المطور
 
 **English:** Waheeb Mahyoob Al-Sharabi (Waheeb Al-Sharabi)  
-**العربية:** هيب مهيوب الشرعبي (هيب الشرعبي)
+**العربية:** وهيب مهيوب الشرعبي (وهيب الشرعبي)
