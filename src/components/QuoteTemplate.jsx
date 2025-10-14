@@ -177,6 +177,16 @@ const QuoteTemplate = ({ data, showTax }) => {
           <td style="font-weight: bold;background-color: rgba(191, 219, 254, 0.5); width: 30%;">الإجمالي قبل الضريبة</td>
           <td style="text-align: left;padding-left: 24px;">${data.subtotal.toFixed(2)}</td>
         </tr>
+
+         ${showDiscount ? `
+          <tr>
+            <td style="font-weight: bold;background-color: rgba(191, 219, 254, 0.5);width: 30%;">الخصم (${data.discount_rate}%)</td>
+            <td style="text-align: left;padding-left: 24px;">${data.discount_amount.toFixed(2)}</td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold;background-color: rgba(191, 219, 254, 0.5);width: 30%;">الإجمالي بعد الخصم</td>
+            <td style="text-align: left;padding-left: 24px;">${data.subtotal_after_discount.toFixed(2)}</td>
+          </tr>` : ''}
         ${showTax ? `
           <tr>
             <td style="font-weight: bold;background-color: rgba(191, 219, 254, 0.5);width: 30%;">قيمة الضريبة (${data.vat_rate}%)</td>
