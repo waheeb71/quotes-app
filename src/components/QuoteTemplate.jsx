@@ -1,6 +1,6 @@
 import React from "react";
 
-const QuoteTemplate = ({ data, showTax }) => {
+const QuoteTemplate = ({ data, showTax, showDiscount }) => {
   
   const htmlContent = `
 <html dir="rtl">
