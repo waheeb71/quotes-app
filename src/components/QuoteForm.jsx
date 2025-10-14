@@ -454,7 +454,7 @@ const QuoteForm = () => {
                       name="discount_rate"
                       value={data.discount_rate}
                       onChange={handleDiscountChange}
-                      min="0"
+                      min=""
                       max="100"
                       step="0.1"
                       className="border border-slate-300 rounded-lg p-3 w-full focus:ring-2 focus:ring-indigo-400 focus:border-transparent text-base"
