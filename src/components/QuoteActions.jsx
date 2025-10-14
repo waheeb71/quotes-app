@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-const QuoteActions = ({ saveToFirebase, downloadPDF, htmlContent, showTax, toggleShowTax }) => {
+const QuoteActions = ({ saveToFirebase, downloadPDF, htmlContent, showTax, toggleShowTax , showDiscount,
+  toggleShowDiscount }) => {
   const [loadingFirebase, setLoadingFirebase] = useState(false);
   const [loadingPDF, setLoadingPDF] = useState(false);
 
@@ -95,6 +96,16 @@ const QuoteActions = ({ saveToFirebase, downloadPDF, htmlContent, showTax, toggl
   {showTax ? "إخفاء الضريبة" : "عرض الضريبة"}
 </button>
 
+ <button
+        onClick={toggleShowDiscount}
+        className={`px-4 py-3 rounded-lg border transition ${
+          showDiscount 
+            ? "bg-indigo-100 border-indigo-500 text-indigo-700" 
+            : "bg-white border-slate-300 text-slate-600"
+        }`}
+      >
+        {showDiscount ? "🙈 إخفاء الخصم" : "👁️ إظهار الخصم"}
+      </button>
     </div>
   );
 };
