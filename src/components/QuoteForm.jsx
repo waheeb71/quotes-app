@@ -429,7 +429,7 @@ const QuoteForm = () => {
                 <span className="text-base font-medium text-slate-700">تفعيل الخصم</span>
               </label>
 
-              <label className="flex items-center gap-3 cursor-pointer">
+             {/* <label className="flex items-center gap-3 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={showTax}
@@ -437,7 +437,7 @@ const QuoteForm = () => {
                   className="w-5 h-5 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
                 />
                 <span className="text-base font-medium text-slate-700">تفعيل الضريبة</span>
-              </label>
+              </label>*/}
             </div>
 
             {/* إعدادات الخصم */}
@@ -476,7 +476,7 @@ const QuoteForm = () => {
             )}
 
             {/* إعدادات الضريبة */}
-            {showTax && (
+          
               <div className="border border-green-200 rounded-lg p-4 bg-green-50">
                 <h3 className="font-medium text-slate-700 mb-3">إعدادات الضريبة</h3>
                 <div>
@@ -495,7 +495,7 @@ const QuoteForm = () => {
                   />
                 </div>
               </div>
-            )}
+           
           </div>
         </div>
 
