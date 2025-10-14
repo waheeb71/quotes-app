@@ -475,7 +475,7 @@ const QuoteForm = () => {
               </div>
             )}
 
-            {/* إعدادات الضريبة */}
+            {/* إعدادات الضريبة 
           
               <div className="border border-green-200 rounded-lg p-4 bg-green-50">
                 <h3 className="font-medium text-slate-700 mb-3">إعدادات الضريبة</h3>
@@ -494,7 +494,7 @@ const QuoteForm = () => {
                     className="border border-slate-300 rounded-lg p-3 w-full focus:ring-2 focus:ring-green-400 focus:border-transparent text-base"
                   />
                 </div>
-              </div>
+              </div>*/}
            
           </div>
         </div>
