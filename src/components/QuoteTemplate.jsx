@@ -98,7 +98,7 @@ const QuoteTemplate = ({ data, showTax, showDiscount }) => {
   </div>
 
   <div class="header-left">
-    <img src="${data.company_logo}" alt="شعار" />
+    <img src="https://quotes553.netlify.app/logoa.png" alt="شعار" />
   </div>
   <h1 class="header-center">عرض سعر</h1>
 
