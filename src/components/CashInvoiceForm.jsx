@@ -125,28 +125,59 @@ const [isSaving, setIsSaving] = useState(false);
 }, [invoiceId]);
 
 
-  const saveToFirebase = async () => {
-    try {
-      // إذا كان الخصم غير مُفعّل، قم بتصفير قيم الخصم قبل الحفظ
-      const finalData = { ...data, company_logo: "/logoa.png" };
-      if (!showDiscount) {
-        finalData.discount_rate = 0;
-        finalData.discount_amount = 0;
-        finalData.subtotal_after_discount = finalData.subtotal;
-      }
-      
-      if (invoiceId) {
-        await updateDoc(doc(db, "cashinvoices", invoiceId), finalData);
-        alert(" تم تحديث الفاتورة النقدية!");
-      } else {
-        await addDoc(collection(db, "cashinvoices"), finalData); 
-        alert("✅ تم حفظ الفاتورة النقدية!");
-      }
-    } catch (err) {
-      console.error(err);
-      alert("⚠️ خطأ في الحفظ");
-    }
-  };
+ // حفظ البيانات في Firebase
+const saveToFirebase = async () => {
+  try {
+    // إذا كان الخصم غير مفعل، تصفير قيم الخصم
+    const finalData = { ...data, company_logo: "/logoa.png" };
+    if (!showDiscount) {
+      finalData.discount_rate = 0;
+      finalData.discount_amount = 0;
+      finalData.subtotal_after_discount = finalData.subtotal;
+    }
+
+    if (invoiceId) {
+      // تحديث فاتورة موجودة
+      await updateDoc(doc(db, "cashinvoices", invoiceId), finalData);
+      alert("✅ تم تحديث الفاتورة النقدية!");
+    } else {
+      // إنشاء فاتورة جديدة: الرقم تم توليده مسبقًا عند إنشاء الفاتورة
+      await addDoc(collection(db, "cashinvoices"), finalData);
+      alert("✅ تم حفظ الفاتورة النقدية!");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("⚠️ خطأ في الحفظ");
+  }
+};
+
+// تحويل الفاتورة إلى PDF
+const downloadPDF = async (htmlContent) => {
+  try {
+    // حفظ البيانات قبل إنشاء PDF
+    await saveToFirebase(); // سيستخدم الرقم الموجود بالفعل
+
+    const response = await fetch("https://server-bd2c.onrender.com/generate-pdf", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ html: htmlContent }),
+    });
+
+    if (!response.ok) throw new Error("خطأ في السيرفر");
+
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `cash-invoice-${Date.now()}.pdf`;
+    link.click();
+    window.URL.revokeObjectURL(url);
+  } catch (err) {
+    console.error("Error generating PDF:", err);
+    alert("⚠️ خطأ أثناء إنشاء PDF");
+  }
+};
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -232,34 +263,7 @@ const [isSaving, setIsSaving] = useState(false);
     }));
   };
 
-  const downloadPDF = async (htmlContent) => {
-    try {
-      // Step 1: Save data before downloading PDF
-      await saveToFirebase();
-
-      // Step 2: Send HTML content to the server for PDF generation
-      const response = await fetch("https://server-bd2c.onrender.com/generate-pdf", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ html: htmlContent }),
-      });
-
-      if (!response.ok) throw new Error("خطأ في السيرفر");
-
-      // Step 3: Receive and download the PDF blob
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = `cash-invoice-${Date.now()}.pdf`;
-      link.click();
-      window.URL.revokeObjectURL(url);
-    } catch (err) {
-      console.error(" Error generating PDF:", err);
-      alert(" خطأ أثناء إنشاء PDF");
-    }
-  };
+ 
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 pb-8">
