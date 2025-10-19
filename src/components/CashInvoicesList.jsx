@@ -53,14 +53,17 @@ const CashInvoicesList = () => {
   /**
    * فلترة الفواتير حسب البحث
    */
-  const filteredInvoices = invoices.filter((i) => {
-    if (!search) return true;
-    if (!i.customer_name) return false;
-    const name = i.customer_name.toLowerCase();
-    const query = search.toLowerCase();
+ const filteredInvoices = invoices.filter((i) => {
+  if (!search) return true; // إذا كان البحث فارغًا، أظهر جميع الفواتير
+  const query = search.toLowerCase();
 
-    return name.includes(query);
-  });
+  const name = i.customer_name ? i.customer_name.toLowerCase() : "";
+  const number = i.invoice_number ? i.invoice_number.toString().toLowerCase() : "";
+
+  // البحث في الاسم أو رقم الفاتورة
+  return name.includes(query) || number.includes(query);
+});
+
 
   return (
     <div className="p-6 min-h-screen bg-slate-50">
@@ -82,13 +85,14 @@ const CashInvoicesList = () => {
       </div>
 
       {/* البحث */}
-      <input
-        type="text"
-        placeholder="ابحث باسم العميل..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="mb-6 w-full p-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-400"
-      />
+    <input
+  type="text"
+  placeholder="ابحث باسم العميل أو رقم الفاتورة..."
+  value={search}
+  onChange={(e) => setSearch(e.target.value)}
+  className="mb-6 w-full p-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-400"
+/>
+
 
       {filteredInvoices.length === 0 ? (
         <p className="text-gray-600 text-center mt-8">لا توجد فواتير نقدية مطابقة للبحث.</p>
