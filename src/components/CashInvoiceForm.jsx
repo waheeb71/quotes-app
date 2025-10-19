@@ -26,7 +26,7 @@ const getNextInvoiceNumber = async (db) => {
             }
 
             // يتم ترقيم الفاتورة بصيغة INV-00000X 
-            return `INV-${newCount.toString().padStart(6, '0')}`;
+             return newCount;
         });
         
         return newInvoiceNumber;
