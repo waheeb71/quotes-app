@@ -1,16 +1,47 @@
 import React, { useState, useEffect } from "react";
 import { db } from "../firebaseConfig";
-import { doc, getDoc, updateDoc, collection, addDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc, collection, addDoc, runTransaction } from "firebase/firestore";
 import { Link, useParams } from "react-router-dom";
 import CashInvoiceTemplate from "./CashInvoiceTemplate";
 import CashInvoiceActions from "./QuoteActions"; // يُفترض أن هذا يحتوي على الأزرار المناسبة
+const getNextInvoiceNumber = async (db) => {
+    // مرجع لمستند العداد المنفصل (يجب إنشاؤه في Firestore: metadata/invoiceCounter)
+    const counterRef = doc(db, "metadata", "invoiceCounter");
+    
+    try {
+        // استخدام المعاملة لضمان القراءة والتحديث كعملية واحدة غير متقطعة
+        const newInvoiceNumber = await runTransaction(db, async (transaction) => {
+            const counterDoc = await transaction.get(counterRef);
+            let newCount;
+            
+            if (!counterDoc.exists()) {
+                // إذا لم يكن المستند موجوداً، نبدأ من 1 وننشئه
+                newCount = 1;
+                transaction.set(counterRef, { count: newCount });
+            } else {
+                // قراءة القيمة الحالية وزيادتها بواحد
+                const currentCount = counterDoc.data().count || 0;
+                newCount = currentCount + 1;
+                transaction.update(counterRef, { count: newCount });
+            }
 
+            // يتم ترقيم الفاتورة بصيغة INV-00000X 
+            return `INV-${newCount.toString().padStart(6, '0')}`;
+        });
+        
+        return newInvoiceNumber;
+    } catch (e) {
+        console.error("فشلت عملية المعاملة لتوليد رقم الفاتورة:", e);
+        throw new Error("فشل في توليد رقم فاتورة فريد.");
+    }
+};
 const CashInvoiceForm = () => {
   const [showTax, setShowTax] = useState(true);
   // 1. إضافة حالة جديدة لتفعيل الخصم
   const [showDiscount, setShowDiscount] = useState(false); 
   const today = new Date().toISOString().split("T")[0];
   const { invoiceId } = useParams();
+const [isSaving, setIsSaving] = useState(false);
 
   const [data, setData] = useState({
     company_name: "مؤسسة القوة العاشرة للمقاولات العامة",
@@ -55,32 +86,44 @@ const CashInvoiceForm = () => {
     };
   };
 
-  useEffect(() => {
-    if (!invoiceId) return;
-    const fetchInvoice = async () => {
-      try {
-        const docRef = doc(db, "cashinvoices", invoiceId);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          const docData = docSnap.data();
-          setData((prev) => ({
-            ...prev,
-            ...docData,
-            invoice_date: docData.invoice_date || prev.invoice_date,
-          }));
-          // تحديث حالة عرض الخصم إذا كانت البيانات المحملة تحتوي على نسبة خصم غير صفرية
-          if (docData.discount_rate > 0) {
-            setShowDiscount(true);
-          }
-        } else {
-          alert(" هذه الفاتورة غير موجودة");
-        }
-      } catch (err) {
-        console.error("Error fetching invoice:", err);
-      }
-    };
-    fetchInvoice();
-  }, [invoiceId]);
+ useEffect(() => {
+  const initializeInvoice = async () => {
+    if (invoiceId) {
+      // تحميل فاتورة موجودة
+      try {
+        const docRef = doc(db, "cashinvoices", invoiceId);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const docData = docSnap.data();
+          setData((prev) => ({
+            ...prev,
+            ...docData,
+            invoice_date: docData.invoice_date || prev.invoice_date,
+          }));
+          if (docData.discount_rate > 0) setShowDiscount(true);
+        } else {
+          alert("هذه الفاتورة غير موجودة");
+        }
+      } catch (err) {
+        console.error("Error fetching invoice:", err);
+      }
+    } else {
+      // إنشاء فاتورة جديدة: توليد رقم فاتورة جديد
+      try {
+        const newInvoiceNumber = await getNextInvoiceNumber(db);
+        setData((prev) => ({
+          ...prev,
+          invoice_number: newInvoiceNumber,
+        }));
+      } catch (err) {
+        console.error("Error generating invoice number:", err);
+      }
+    }
+  };
+
+  initializeInvoice();
+}, [invoiceId]);
+
 
   const saveToFirebase = async () => {
     try {
@@ -293,8 +336,8 @@ const CashInvoiceForm = () => {
               />
             </div>
              
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
+         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/*   <div>
                 <label className="block text-sm font-medium text-slate-700 mb-2">
                   رقم الفاتورة <span className="text-red-500">*</span>
                 </label>
@@ -306,7 +349,7 @@ const CashInvoiceForm = () => {
                   placeholder="INV-001"
                   className="border border-slate-300 rounded-lg p-3 w-full focus:ring-2 focus:ring-indigo-400 focus:border-transparent text-base"
                 />
-              </div>
+              </div>*/}
 
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-2">
