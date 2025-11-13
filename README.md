@@ -89,4 +89,4 @@ For questions or support, contact me via:
 ## Author / المطور
 
 **English:** Waheeb Mahyoob Al-Humaeri (Waheeb Al-Humaeri)  
-**العربية:** وهيب مهيوب االحميري (وهيب الحميري)
+**العربية:** وهيب مهيوب الحميري (وهيب الحميري)
