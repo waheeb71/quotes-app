@@ -81,14 +81,15 @@ const QuoteTemplate = ({ data, showTax, showDiscount }) => {
         position: relative;
         z-index: 1;
       }
+     
       .stamp {
         position: absolute;
         width: 100px;
         height: 100px;
-        left: 10%;
-        top: 150%;
+        left: 9%;
+        top: 130%;
         transform: translate(-50%, -50%);
-        opacity: 0.5;
+        opacity: 0.8;
         z-index: 2;
       }
 
