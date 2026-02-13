@@ -1,7 +1,7 @@
 import React from "react";
 
 const QuoteTemplate = ({ data, showTax, showDiscount }) => {
-  
+
   const htmlContent = `
 <html dir="rtl">
   <head>
@@ -71,7 +71,26 @@ const QuoteTemplate = ({ data, showTax, showDiscount }) => {
       .text-blue { color: #2563eb; }
       .totals td { font-weight: bold; }
       .notes { margin-top: 15px; }
-      .signature { margin-top: 10px; text-align: left; }
+      .signature { 
+        margin-top: 10px; 
+        text-align: left; 
+        position: relative;
+        min-height: 120px;
+      }
+      .signature-text {
+        position: relative;
+        z-index: 1;
+      }
+      .stamp {
+        position: absolute;
+        width: 180px;
+        height: 180px;
+        left: 10%;
+        top: 150%;
+        transform: translate(-50%, -50%);
+        opacity: 0.5;
+        z-index: 2;
+      }
 
 
 
@@ -205,8 +224,11 @@ const QuoteTemplate = ({ data, showTax, showDiscount }) => {
       </div>
 
       <div class="signature" style="margin-top: 10%;">
-        <p>ولكم منا جزيل الشكر والتقدير ............</p>
-        <p><strong>${data.company_name}</strong></p>
+        <img src="https://quotes553.netlify.app/hatm.png" alt="ختم الشركة" class="stamp" />
+        <div class="signature-text">
+          <p>ولكم منا جزيل الشكر والتقدير ............</p>
+          <p><strong>${data.company_name}</strong></p>
+        </div>
       </div>
     </div>
   </body>
