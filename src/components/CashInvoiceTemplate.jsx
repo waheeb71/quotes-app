@@ -83,8 +83,8 @@ const CashInvoiceTemplate = ({ data, showTax, showDiscount }) => {
       }
       .stamp {
         position: absolute;
-        width: 180px;
-        height: 180px;
+        width: 100px;
+        height: 100px;
         left: 10%;
         top: 150%;
         transform: translate(-50%, -50%);
