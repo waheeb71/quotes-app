@@ -79,7 +79,7 @@ const CashInvoiceTemplate = ({ data, showTax, showDiscount }) => {
       }
       .signature-text {
         position: relative;
-        z-index: 2;
+        z-index: 1;
       }
       .stamp {
         position: absolute;
@@ -89,7 +89,7 @@ const CashInvoiceTemplate = ({ data, showTax, showDiscount }) => {
         top: 50%;
         transform: translate(-50%, -50%);
         opacity: 0.5;
-        z-index: 1;
+        z-index: 2;
       }
      h2 { 
      margin-top: 1rem; 
