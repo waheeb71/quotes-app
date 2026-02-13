@@ -83,9 +83,9 @@ const CashInvoiceTemplate = ({ data, showTax, showDiscount }) => {
         flex: 1;
       }
       .stamp {
-        width: 100px;
-        height: 100px;
-        margin-left: 20px;
+        width: 200px;
+        height: 200px;
+        margin-left: 80px;
         opacity: 0.8;
       }
      h2 { 
