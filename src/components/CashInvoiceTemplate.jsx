@@ -86,7 +86,7 @@ const CashInvoiceTemplate = ({ data, showTax, showDiscount }) => {
         width: 180px;
         height: 180px;
         left: 10%;
-        top: 80%;
+        top: 150%;
         transform: translate(-50%, -50%);
         opacity: 0.5;
         z-index: 2;
