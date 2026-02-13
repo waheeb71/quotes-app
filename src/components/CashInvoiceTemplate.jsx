@@ -75,18 +75,21 @@ const CashInvoiceTemplate = ({ data, showTax, showDiscount }) => {
         margin-top: 10px; 
         text-align: left; 
         position: relative;
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
+        min-height: 120px;
       }
       .signature-text {
-        flex: 1;
+        position: relative;
+        z-index: 2;
       }
       .stamp {
-        width: 200px;
-        height: 200px;
-        margin-left: 80px;
-        opacity: 0.8;
+        position: absolute;
+        width: 180px;
+        height: 180px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0.5;
+        z-index: 1;
       }
      h2 { 
      margin-top: 1rem; 
@@ -213,11 +216,11 @@ const CashInvoiceTemplate = ({ data, showTax, showDiscount }) => {
       <div class="notes">
         ${data.notes ? `<p><strong>ملاحظات:</strong> ${data.notes}</p>` : ''}
       </div>
-        <img src="https://quotes553.netlify.app/ختم.png" alt="ختم الشركة" class="stamp" />
+
       <div class="signature" style="margin-top: 10%;">
+        <img src="https://quotes553.netlify.app/ختم.png" alt="ختم الشركة" class="stamp" />
         <div class="signature-text">
           <p>ولكم منا جزيل الشكر والتقدير ............</p>
-          
           <p><strong>${data.company_name}</strong></p>
         </div>
       
