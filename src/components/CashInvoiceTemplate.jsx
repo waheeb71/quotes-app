@@ -213,13 +213,14 @@ const CashInvoiceTemplate = ({ data, showTax, showDiscount }) => {
       <div class="notes">
         ${data.notes ? `<p><strong>ملاحظات:</strong> ${data.notes}</p>` : ''}
       </div>
-
+        <img src="https://quotes553.netlify.app/ختم.png" alt="ختم الشركة" class="stamp" />
       <div class="signature" style="margin-top: 10%;">
         <div class="signature-text">
           <p>ولكم منا جزيل الشكر والتقدير ............</p>
+          
           <p><strong>${data.company_name}</strong></p>
         </div>
-        <img src="https://quotes553.netlify.app/ختم.png" alt="ختم الشركة" class="stamp" />
+      
       </div>
     </div>
   </body>
