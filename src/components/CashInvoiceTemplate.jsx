@@ -1,7 +1,7 @@
 import React from "react";
 
-const CashInvoiceTemplate = ({ data, showTax,showDiscount }) => {
-  
+const CashInvoiceTemplate = ({ data, showTax, showDiscount }) => {
+
   const htmlContent = `
 <html dir="rtl">
   <head>
@@ -71,10 +71,23 @@ const CashInvoiceTemplate = ({ data, showTax,showDiscount }) => {
       .text-blue { color: #2563eb; }
       .totals td { font-weight: bold; }
       .notes { margin-top: 15px; }
-      .signature { margin-top: 10px; text-align: left; }
-
-
-
+      .signature { 
+        margin-top: 10px; 
+        text-align: left; 
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+      .signature-text {
+        flex: 1;
+      }
+      .stamp {
+        width: 100px;
+        height: 100px;
+        margin-left: 20px;
+        opacity: 0.8;
+      }
      h2 { 
      margin-top: 1rem; 
       margin-bottom: 0rem; 
@@ -202,8 +215,11 @@ const CashInvoiceTemplate = ({ data, showTax,showDiscount }) => {
       </div>
 
       <div class="signature" style="margin-top: 10%;">
-        <p>ولكم منا جزيل الشكر والتقدير ............</p>
-        <p><strong>${data.company_name}</strong></p>
+        <div class="signature-text">
+          <p>ولكم منا جزيل الشكر والتقدير ............</p>
+          <p><strong>${data.company_name}</strong></p>
+        </div>
+        <img src="https://quotes553.netlify.app/ختم.png" alt="ختم الشركة" class="stamp" />
       </div>
     </div>
   </body>
