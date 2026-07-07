@@ -216,9 +216,9 @@ const QuoteTemplate = ({ data, showTax, showDiscount }) => {
   <td style="font-weight: bold; background-color: rgba(191, 219, 254, 0.5); width: 30%;">
     الإجمالي بعد الضريبة
 </td>
-<td style="text-align: left; padding-left: 24px;">
+<td style="text-align: left; padding-left: 20px;">
 ${data.total.toFixed(2)}
-<img src="https://quotes553.netlify.app/Saudi_Riyal_Symbol.svg" style="width:12px; height:12px; vertical-align:middle; margin-right:0px;" alt="ريال" /> </td>
+<img src="https://quotes553.netlify.app/Saudi_Riyal_Symbol.svg" style="width:12px; height:12px; vertical-align:middle; margin-right:-2px;" alt="ريال" /> </td>
 </tr>` : ''}
       </table>
       
