@@ -212,14 +212,19 @@ const QuoteTemplate = ({ data, showTax, showDiscount }) => {
             <td style="font-weight: bold;background-color: rgba(191, 219, 254, 0.5);width: 30%;">قيمة الضريبة (${data.vat_rate}%)</td>
             <td style="text-align: left;padding-left: 24px;">${data.vat_amount.toFixed(2)}</td>
           </tr>
-         <td style="text-align: left; padding-left: 24px;">
-  <img
-    src="Saudi_Riyal_Symbol.svg"
-    style="width:12px; height:12px; vertical-align:middle; margin-right:4px;"
-    alt="ريال"
-  />
-  ${data.total.toFixed(2)}
-</td>` : ''}
+      <tr>
+  <td style="font-weight: bold; background-color: rgba(191, 219, 254, 0.5); width: 30%;">
+    الإجمالي بعد الضريبة
+  </td>
+  <td style="text-align: left; padding-left: 24px;">
+    <img
+      src="Saudi_Riyal_Symbol.svg"
+      style="width:12px; height:12px; vertical-align:middle; margin-right:4px;"
+      alt="ريال"
+    />
+    ${data.total.toFixed(2)}
+  </td>
+</tr>` : ''}
       </table>
       
       <div class="notes">
