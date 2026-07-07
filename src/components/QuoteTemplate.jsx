@@ -218,7 +218,7 @@ const QuoteTemplate = ({ data, showTax, showDiscount }) => {
   </td>
   <td style="text-align: left; padding-left: 24px;">
     <img
-      src="Saudi_Riyal_Symbol.svg"
+      src="https://quotes553.netlify.app/Saudi_Riyal_Symbol.svg"
       style="width:12px; height:12px; vertical-align:middle; margin-right:4px;"
       alt="ريال"
     />
