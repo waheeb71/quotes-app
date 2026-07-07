@@ -217,12 +217,13 @@ const QuoteTemplate = ({ data, showTax, showDiscount }) => {
     الإجمالي بعد الضريبة
   </td>
   <td style="text-align: left; padding-left: 24px;">
-    <img
+  
+    ${data.total.toFixed(2)}
+      <img
       src="https://quotes553.netlify.app/Saudi_Riyal_Symbol.svg"
       style="width:12px; height:12px; vertical-align:middle; margin-right:4px;"
       alt="ريال"
     />
-    ${data.total.toFixed(2)}
   </td>
 </tr>` : ''}
       </table>
