@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { db, storage } from "../firebaseConfig";
-import { doc, getDoc, updateDoc, collection, addDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc, collection, addDoc, getDocs } from "firebase/firestore";
 import { useNavigate, Link, useParams } from "react-router-dom";
 import QuoteTemplate from "./QuoteTemplate";
 import QuoteActions from "./QuoteActions";
@@ -19,7 +19,7 @@ const QuoteForm = () => {
     customer_name: "",
     customer_tax_number: "",
     customer_phone: "",
-    quote_number: "",
+    quote_number: "1100",
     quote_date: today,
     items: [{ description: "", quantity: 1, unit_price: 0, total_price: 0 }],
     subtotal: 0,
@@ -34,26 +34,57 @@ const QuoteForm = () => {
   });
 
   useEffect(() => {
-    if (!quoteId) return;
-    const fetchQuote = async () => {
-      try {
-        const docRef = doc(db, "quotes", quoteId);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          const docData = docSnap.data();
+    if (quoteId) {
+      const fetchQuote = async () => {
+        try {
+          const docRef = doc(db, "quotes", quoteId);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            const docData = docSnap.data();
+            setData((prev) => ({
+              ...prev,
+              ...docData,
+              quote_date: docData.quote_date || prev.quote_date,
+            }));
+          } else {
+            alert(" هذا العرض غير موجود");
+          }
+        } catch (err) {
+          console.error("Error fetching quote:", err);
+        }
+      };
+      fetchQuote();
+    } else {
+      const generateQuoteNumber = async () => {
+        try {
+          const querySnapshot = await getDocs(collection(db, "quotes"));
+          let maxNum = 1099; // البداية من 1100
+
+          querySnapshot.forEach((docSnap) => {
+            const qData = docSnap.data();
+            if (qData.quote_number) {
+              const num = parseInt(String(qData.quote_number).replace(/\D/g, ""), 10);
+              if (!isNaN(num) && num > maxNum) {
+                maxNum = num;
+              }
+            }
+          });
+
+          const nextQuoteNumber = maxNum + 1;
           setData((prev) => ({
             ...prev,
-            ...docData,
-            quote_date: docData.quote_date || prev.quote_date,
+            quote_number: String(nextQuoteNumber),
           }));
-        } else {
-          alert(" هذا العرض غير موجود");
+        } catch (err) {
+          console.error("Error generating quote number:", err);
+          setData((prev) => ({
+            ...prev,
+            quote_number: "1100",
+          }));
         }
-      } catch (err) {
-        console.error("Error fetching quote:", err);
-      }
-    };
-    fetchQuote();
+      };
+      generateQuoteNumber();
+    }
   }, [quoteId]);
 
   const saveToFirebase = async () => {
@@ -297,7 +328,7 @@ const QuoteForm = () => {
                   name="quote_number"
                   value={data.quote_number}
                   onChange={handleChange}
-                  placeholder="Q-001"
+                  placeholder="1100"
                   className="border border-slate-300 rounded-lg p-3 w-full focus:ring-2 focus:ring-indigo-400 focus:border-transparent text-base"
                 />
               </div>
