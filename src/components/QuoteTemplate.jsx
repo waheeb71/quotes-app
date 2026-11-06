@@ -231,20 +231,21 @@ ${data.total.toFixed(2)}
         </div>
         <table style="border-collapse: collapse; width: 100%; margin-bottom: 10px;">
           <thead>
-            <tr style="background-color: #000; color: #fff;">
+          <!--
+  <tr style="background-color: #000; color: #fff;">
               <th style="background-color: #000; color: #fff; width: 50%; padding: 4px; border: 1px solid #000; text-align: center; font-size: 10px; font-weight: bold; vertical-align: middle;">اسم البنك</th>
-           <!--    <th style="background-color: #000; color: #fff; width: 50%; padding: 4px; border: 1px solid #000; text-align: center; font-size: 10px; font-weight: bold; vertical-align: middle;">بنك الراجحي</th> -->
+            <th style="background-color: #000; color: #fff; width: 50%; padding: 4px; border: 1px solid #000; text-align: center; font-size: 10px; font-weight: bold; vertical-align: middle;">بنك الراجحي</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-            <!--   <td style="width: 50%; padding: 4px; border: 1px solid #000; text-align: center; font-size: 10px; vertical-align: middle;">رقم الحساب الجاري</td>-->
-             <!--  <td style="width: 50%; padding: 4px; border: 1px solid #000; text-align: center; font-size: 10px; font-weight: bold; direction: ltr; unicode-bidi: embed; vertical-align: middle;">22500-001-0006080933116</td> -->
+              <td style="width: 50%; padding: 4px; border: 1px solid #000; text-align: center; font-size: 10px; vertical-align: middle;">رقم الحساب الجاري</td>
+              <td style="width: 50%; padding: 4px; border: 1px solid #000; text-align: center; font-size: 10px; font-weight: bold; direction: ltr; unicode-bidi: embed; vertical-align: middle;">22500-001-0006080933116</td>
             </tr>
             <tr>
-            <!--   <td style="width: 50%; padding: 4px; border: 1px solid #000; text-align: center; font-size: 10px; vertical-align: middle;">رقم الحساب الدولي ( أيبان ) IBAN</td>-->
-           <!--    <td style="width: 50%; padding: 4px; border: 1px solid #000; text-align: center; font-size: 10px; font-weight: bold; direction: ltr; unicode-bidi: embed; vertical-align: middle;">SA26 8000 0225 6080 1093 3116</td> -->
-            </tr> 
+              <td style="width: 50%; padding: 4px; border: 1px solid #000; text-align: center; font-size: 10px; vertical-align: middle;">رقم الحساب الدولي ( أيبان ) IBAN</td>
+              <td style="width: 50%; padding: 4px; border: 1px solid #000; text-align: center; font-size: 10px; font-weight: bold; direction: ltr; unicode-bidi: embed; vertical-align: middle;">SA26 8000 0225 6080 1093 3116</td>
+            </tr>  -->
             <tr style="background-color: #000; color: #fff;">
               <th style="background-color: #000; color: #fff; width: 50%; padding: 4px; border: 1px solid #000; text-align: center; font-size: 10px; font-weight: bold; vertical-align: middle;">اسم البنك</th>
               <th style="background-color: #000; color: #fff; width: 50%; padding: 4px; border: 1px solid #000; text-align: center; font-size: 10px; font-weight: bold; vertical-align: middle;">البنك الأهلي السعودي</th>
